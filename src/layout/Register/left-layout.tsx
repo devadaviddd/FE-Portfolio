@@ -1,22 +1,21 @@
 import { Container } from "@mui/material";
 import React from "react";
-import { SignInFormComponent } from "../../components/sign-in";
+import { SignUpFormComponent } from "../../components";
 
-export const LeftLoginLayout = () => {
+export const LeftRegisterLayout = () => {
   return (
     <Container
       sx={{
         width: "50%",
         height: "100vh",
         background: "white",
-        position: "relative"
+        position: "relative",
       }}
     >
-      
       <div
         style={{
           position: "absolute",
-          top: '70px',
+          top: "70px",
           left: 0,
           zIndex: 1,
         }}
@@ -30,7 +29,7 @@ export const LeftLoginLayout = () => {
           }}
         />
       </div>
-      <SignInFormComponent />
+      <SignUpFormComponent />
     </Container>
   );
 };

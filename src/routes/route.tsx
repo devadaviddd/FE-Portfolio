@@ -1,5 +1,5 @@
 import React from 'react';
-import { SignIn } from '../pages';
+import { SignUp } from '../pages';
 
 type RoutePath = {
   path: string;
@@ -12,8 +12,8 @@ export type RouteType = {
 
 export const routePaths: RouteType = {
   public: [
-    { path: "/", element: <SignIn/>},
-    { path: "/signin", element: <SignIn/>},
+    { path: "/", element: <></>},
+    { path: "/signup", element: <SignUp/>},
   ],
   private: [],
 };

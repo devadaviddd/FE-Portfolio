@@ -3,12 +3,15 @@ import logo from "./logo.svg";
 import { PublicRouter, routePaths } from "./routes";
 import { theme } from "./theme/theme";
 import { ThemeProvider } from "@mui/material/styles";
+import { RecoilRoot } from "recoil";
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <PublicRouter />
-    </ThemeProvider>
+    <RecoilRoot>
+      <ThemeProvider theme={theme}>
+        <PublicRouter />
+      </ThemeProvider>
+    </RecoilRoot>
   );
 }
 

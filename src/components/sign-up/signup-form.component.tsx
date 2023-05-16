@@ -1,8 +1,8 @@
 import { Container, FormControl, TextField, Typography } from "@mui/material";
 import "./style.css";
-import { SigninButton } from "../button";
+import { SignUpButton } from "../button";
 
-export const SignInFormComponent = () => {
+export const SignUpFormComponent = () => {
   return (
     <FormControl className="FormStyle">
       <Container
@@ -24,7 +24,7 @@ export const SignInFormComponent = () => {
           sx={{ marginBottom: "20px" }}
           className="TitleStyle"
         >
-          Sign in
+          Sign up
         </Typography>
         <TextField
           className="InputStyle"
@@ -53,7 +53,7 @@ export const SignInFormComponent = () => {
           autoComplete="current-password"
           variant="outlined"
         />
-        <SigninButton />
+        <SignUpButton />
       </Container>
     </FormControl>
   );

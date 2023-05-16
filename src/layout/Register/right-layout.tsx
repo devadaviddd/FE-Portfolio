@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 import React from "react";
 
-export const RightLoginLayout = () => {
+export const RightRegisterLayout = () => {
   return (
     <Container
       sx={{
