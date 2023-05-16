@@ -1,0 +1,18 @@
+.FormStyle {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  z-index: 2;
+}
+
+.FormStyle .InputStyle {
+  width: 80%;
+  height: 50px;
+  margin-top: 15px;
+}
+
+.FormStyle .TitleStyle {
+  width: 80%;
+}
