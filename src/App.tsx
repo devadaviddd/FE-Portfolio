@@ -3,15 +3,19 @@ import logo from "./logo.svg";
 import { PublicRouter, routePaths } from "./routes";
 import { theme } from "./theme/theme";
 import { ThemeProvider } from "@mui/material/styles";
-import { RecoilRoot } from "recoil";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <RecoilRoot>
-      <ThemeProvider theme={theme}>
-        <PublicRouter />
-      </ThemeProvider>
-    </RecoilRoot>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Routes>
+          {routePaths.public.map((route, index) => (
+            <Route key={index} path={route.path} element={route.element} />
+          ))}
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

@@ -1,11 +1,17 @@
+export interface SchoolProps {
+  name: string;
+}
+
 export class School {
   public name: string;
-  get getName(): string {
-    return this.name;
-  }  
-  constructor(name: string) {
-    this.name = name;
+  constructor(props: SchoolProps) {
+    this.name = props.name;
   }
+  public getProps(): SchoolProps {
+    return {
+      name: this.name,
+    };
+  } 
 }
 
 

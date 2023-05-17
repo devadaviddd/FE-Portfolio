@@ -1,4 +1,5 @@
 import { UserAPI, UserAPIprops } from "../data";
+import { User } from "../domains";
 
 const userAPIprops: UserAPIprops = {
   viewUsers: '/users',
@@ -8,4 +9,4 @@ const userAPIprops: UserAPIprops = {
   signin: '/auth/signin'
 }
 
-const userAPI = new UserAPI(userAPIprops);
+export const userAPI = new UserAPI(userAPIprops);

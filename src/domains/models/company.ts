@@ -1,10 +1,16 @@
+export interface CompanyProps {
+  name: string;
+}
+
 export class Company {
   public name: string;
-  get getName(): string {
-    return this.name;
-  }  
   constructor(name: string) {
     this.name = name;
+  }
+  public getProps(): CompanyProps {
+    return {
+      name: this.name,
+    };
   }
 }
 

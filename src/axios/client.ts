@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 import { ErrorResponse } from "../domains";
+import { Store } from "@reduxjs/toolkit";
 
 export const APIService: AxiosInstance = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_ENDPOINT,
@@ -8,7 +9,9 @@ export const APIService: AxiosInstance = axios.create({
   },
 });
 
-export const setUpInterceptors = (instance: AxiosInstance) => {
+export const setUpInterceptors = (
+  store: Store,
+  instance: AxiosInstance) => {
   instance.interceptors.response.use(
     (response: AxiosResponse) => {
       return response.data;

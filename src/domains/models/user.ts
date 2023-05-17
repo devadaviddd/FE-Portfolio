@@ -23,34 +23,6 @@ export class User {
   public password: string;
   public id? : string
 
-  get getUsername(): string {
-    return this.username;
-  }
-  get getEmail(): string {
-    return this.email;
-  }
-  get getFullName(): string {
-    return this.fullName;
-  }
-  get getMajor(): string | undefined {
-    return this.major;
-  }
-  get getCompany(): Company[] | undefined {
-    return this.company;
-  }
-  get getSchool(): School[] | undefined {
-    return this.school;
-  }
-  get getAvatar(): string | undefined {
-    return this.avatar;
-  }
-  get getPassword(): string {
-    return this.password;
-  }
-  get getId(): string | undefined {
-    return this.id;
-  }
-
   constructor(props: UserProps) {
     this.username = props.username;
     this.email = props.email;
