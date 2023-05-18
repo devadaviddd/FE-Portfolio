@@ -38,8 +38,8 @@ export const RightRegisterLayout = () => {
         }}
       >
         <img
-          src={require("../../assets/sign-in-img.png")}
-          alt="sign in background"
+          src={require("../../assets/sign-up-img.png")}
+          alt="sign up background"
           style={{
             height: "500px",
             width: "500px",

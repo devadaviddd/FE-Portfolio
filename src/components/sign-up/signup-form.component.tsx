@@ -1,6 +1,13 @@
-import { Container, FormControl, TextField, Typography } from "@mui/material";
+import {
+  Container,
+  FormControl,
+  Link,
+  TextField,
+  Typography,
+} from "@mui/material";
 import "./style.css";
 import { SignUpButton } from "../button";
+import { NavLink } from "react-router-dom";
 
 export const SignUpFormComponent = () => {
   return (
@@ -13,7 +20,7 @@ export const SignUpFormComponent = () => {
           alignItems: "center",
           backgroundColor: "#fff",
           borderRadius: "10px",
-          height: "50%",
+          height: "60vh",
           boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
         }}
         maxWidth="xs"
@@ -30,8 +37,8 @@ export const SignUpFormComponent = () => {
           className="InputStyle"
           id="outlined-basic"
           label="Full name"
-          variant="outlined"        
-          style={{ marginTop: '0px'}}  
+          variant="outlined"
+          style={{ marginTop: "0px" }}
         />
         <TextField
           className="InputStyle"
@@ -53,7 +60,24 @@ export const SignUpFormComponent = () => {
           autoComplete="current-password"
           variant="outlined"
         />
-        <SignUpButton />
+        <SignUpButton textArea="Sign Up" />
+        <Typography
+          sx={{
+            width: "100%",
+            height: "50px",
+            textAlign: "center",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          Already on MeHub? &nbsp;
+          <NavLink to={"/signin"}>
+            <Link href="" underline="none">
+              Sign In
+            </Link>
+          </NavLink>
+        </Typography>
       </Container>
     </FormControl>
   );

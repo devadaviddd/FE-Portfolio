@@ -16,16 +16,12 @@ const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
   height: '50px',
 }));
 
-type Props = {
-  textArea: string
-}
-
-export const SignUpButton = (props: Props) => {
+export const SignInButton = () => {
   return (
     <Stack spacing={2} direction="row" sx={{
       width: '80%'
     }}>
-      <ColorButton variant="contained" size='medium'>{props.textArea}</ColorButton>
+      <ColorButton variant="contained" size='medium'>Sign in</ColorButton>
     </Stack>
   );
 }
