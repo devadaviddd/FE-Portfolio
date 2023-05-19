@@ -1,17 +1,31 @@
-import {
-  Container,
-  FormControl,
-  Link,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { FormControl, TextField, Typography } from "@mui/material";
 import "./style.css";
-import { RegisterButton, SignInButton, SignUpButton } from "../button";
-import { NavLink } from "react-router-dom";
+import { RegisterButton, SignInButton } from "../button";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useUserSlice } from "../../store";
+import { SignInDto } from "../../domains";
 
 export const SignInFormComponent = () => {
+  const dispatch = useAppDispatch();
+  const { actions } = useUserSlice();
+  const { actionStatus } = useAppSelector((state) => state.user);
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get("email"),
+      password: data.get("password"),
+    });
+    const input: SignInDto = {
+      email: data.get("email") as string,
+      password: data.get("password") as string,
+    }
+    dispatch(actions.signIn(input));
+  };
+
   return (
-    <FormControl className="FormStyle">
+    <FormControl className="FormStyle" component="form" onSubmit={handleSubmit}>
       <Typography
         variant="h2"
         fontWeight="300"
@@ -24,6 +38,7 @@ export const SignInFormComponent = () => {
         className="InputStyle"
         id="outlined-basic"
         label="Email"
+        name="email"
         variant="outlined"
       />
       <TextField
@@ -31,6 +46,7 @@ export const SignInFormComponent = () => {
         id="outlined-password-input"
         label="Password"
         type="password"
+        name="password"
         autoComplete="current-password"
         variant="outlined"
       />

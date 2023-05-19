@@ -1,7 +1,7 @@
 import { UserState, UserStateProps } from "../store/user/user.state";
 
 const userStateProps: UserStateProps = {
-  ActionStatus: "idle",
+  actionStatus: "idle",
 }
 
 export const userManagementInitialState = new UserState(userStateProps);

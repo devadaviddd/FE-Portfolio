@@ -7,7 +7,7 @@ import {
   UpdateUserDto,
 } from "../domains";
 import {
-  SignInResponse,
+  SignInResponseSuccess,
   GetUserByEmailResponse,
   CreateUserResponse,
   UpdateUserResponse,
@@ -19,7 +19,7 @@ export class UserRepository implements IUserRepository {
   constructor(api: AxiosInstance) {
     this.api = api;
   }
-  signin(dto: SignInDto): Promise<SignInResponse> {
+  signin(dto: SignInDto): Promise<SignInResponseSuccess> {
     return this.api.post(userAPI.Signin, dto);
   }
   findByEmail(email: string): Promise<GetUserByEmailResponse> {

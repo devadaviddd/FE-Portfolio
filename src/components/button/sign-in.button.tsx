@@ -21,7 +21,7 @@ export const SignInButton = () => {
     <Stack spacing={2} direction="row" sx={{
       width: '80%'
     }}>
-      <ColorButton variant="contained" size='medium'>Sign in</ColorButton>
+      <ColorButton variant="contained" size='medium' type='submit'>Sign in</ColorButton>
     </Stack>
   );
 }
