@@ -28,15 +28,16 @@ export const userSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(signIn.pending, (state) => ({
       ...state,
-      ActionStatus: "loading",
+      actionStatus: "loading",
     }));
     builder.addCase(signIn.fulfilled, (state, { payload }) => ({
       ...state,
-      ActionStatus: "success",
+      actionStatus: "success",
+      error: undefined,
     }));
     builder.addCase(signIn.rejected, (state, { payload }) => ({
       ...state,
-      ActionStatus: "error",
+      actionStatus: "error",
       error: payload
     }))
   },

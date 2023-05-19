@@ -1,28 +1,10 @@
 import { FormControl, TextField, Typography } from "@mui/material";
 import "./style.css";
 import { RegisterButton, SignInButton } from "../button";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { useUserSlice } from "../../store";
-import { SignInDto } from "../../domains";
+import { useSignIn } from "../../hooks";
 
 export const SignInFormComponent = () => {
-  const dispatch = useAppDispatch();
-  const { actions } = useUserSlice();
-  const { actionStatus } = useAppSelector((state) => state.user);
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-    const input: SignInDto = {
-      email: data.get("email") as string,
-      password: data.get("password") as string,
-    }
-    dispatch(actions.signIn(input));
-  };
+  const { handleSubmit } = useSignIn();
 
   return (
     <FormControl className="FormStyle" component="form" onSubmit={handleSubmit}>
