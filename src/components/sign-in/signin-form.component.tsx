@@ -1,10 +1,32 @@
-import { FormControl, TextField, Typography } from "@mui/material";
+import {
+  FormControl,
+  TextField,
+  Typography,
+  TextFieldProps,
+} from "@mui/material";
 import "./style.css";
 import { RegisterButton, SignInButton } from "../button";
 import { useSignIn } from "../../hooks";
+import { useRef, useState, useEffect } from "react";
 
 export const SignInFormComponent = () => {
-  const { handleSubmit } = useSignIn();
+  const { handleSubmit, actionStatus, error } = useSignIn();
+  const [emailFocus, setEmailFocus] = useState<boolean>(false);
+  const [emailError, setEmailError] = useState<boolean>(false);
+
+  const [passwordFocus, setPasswordFocus] = useState<boolean>(false);
+  const [passwordError, setPasswordError] = useState<boolean>(false);
+
+
+  useEffect(() => {
+    if (error) {
+      setEmailFocus(true);
+      setEmailError(true);
+
+      setPasswordError(true);
+      setPasswordFocus(true);
+    }
+  }, [error])
 
   return (
     <FormControl className="FormStyle" component="form" onSubmit={handleSubmit}>
@@ -22,6 +44,17 @@ export const SignInFormComponent = () => {
         label="Email"
         name="email"
         variant="outlined"
+        error={emailError}
+        required={true}
+        focused={emailFocus}
+        onFocus={() =>  {
+          if (error) {
+            setEmailError(false);
+          } 
+          setEmailFocus(true);
+        }}
+        onBlur={() => setEmailFocus(false)}
+
       />
       <TextField
         className="InputStyle"
@@ -31,6 +64,16 @@ export const SignInFormComponent = () => {
         name="password"
         autoComplete="current-password"
         variant="outlined"
+        error={passwordError}
+        required={true}
+        focused={passwordFocus}
+        onFocus={() =>  {
+          if (error) {
+            setPasswordError(false);
+          }
+          setPasswordFocus(true);
+        }}
+        onBlur={() => setPasswordFocus(false)}
       />
       <SignInButton />
       <div

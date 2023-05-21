@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "./redux.hook";
 export const useSignIn = () => {
   const dispatch = useAppDispatch();
   const { actions } = useUserSlice();
-  const { actionStatus } = useAppSelector((state) => state.user);
+  const { actionStatus, error } = useAppSelector((state) => state.user);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -24,5 +24,7 @@ export const useSignIn = () => {
 
   return {
     handleSubmit,
+    actionStatus,
+    error
   }
 }

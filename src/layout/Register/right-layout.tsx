@@ -6,46 +6,11 @@ export const RightRegisterLayout = () => {
     <Container
       sx={{
         width: "50%",
-        height: "100vh",
+        minHeight: "100vh",
         background: "#dde9f5",
         position: "relative",
       }}
     >
-      <div
-        style={{
-          position: "absolute",
-          bottom: 0,
-          right: 0,
-          zIndex: 1,
-        }}
-      >
-        <img
-          src={require("../../assets/cloud-animation.png")}
-          alt="sign in background"
-          style={{
-            height: "700px",
-            width: "100%",
-            objectFit: "cover",
-          }}
-        />
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          bottom: 0,
-          right: 0,
-          zIndex: 2,
-        }}
-      >
-        <img
-          src={require("../../assets/sign-up-img.png")}
-          alt="sign up background"
-          style={{
-            height: "500px",
-            width: "500px",
-          }}
-        />
-      </div>
     </Container>
   );
 };
