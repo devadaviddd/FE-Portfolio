@@ -23,7 +23,7 @@ export const userSlice = createSlice({
   name: "user-state-management",
   initialState: userManagementInitialState,
   reducers: {
-    reset: userManagementReducer.reset,
+    reset: () => userManagementInitialState,
   },
   extraReducers(builder) {
     builder.addCase(signIn.pending, (state) => ({

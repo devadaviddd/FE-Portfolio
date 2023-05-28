@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { SignInDto } from "../domains";
 import { useUserSlice } from "../store";
 import { useAppDispatch, useAppSelector } from "./redux.hook";
@@ -6,6 +7,12 @@ export const useSignIn = () => {
   const dispatch = useAppDispatch();
   const { actions } = useUserSlice();
   const { actionStatus, error } = useAppSelector((state) => state.user);
+
+  useEffect(() => {
+    return () => {
+      dispatch(actions.reset());
+    };
+  }, []);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -1,7 +1,7 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { wrap } from "popmotion";
 import { cvs } from "../../constant";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./style.css";
 
 const variants = {
@@ -32,6 +32,9 @@ const swipePower = (offset: number, velocity: number) => {
 
 export const CVCarousel = () => {
   const [[page, direction], setPage] = useState([0, 0]);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
 
   // We only have 3 images, but we paginate them absolutely (ie 1, 2, 3, 4, 5...) and
   // then wrap that within 0-2 to find our image ID in the array below. By passing an
@@ -62,9 +65,15 @@ export const CVCarousel = () => {
           initial="enter"
           animate="center"
           exit="exit"
+          ref={ref}
           transition={{
-            x: { type: "spring", stiffness: 300, damping: 40 },
-            opacity: { duration: 0.1 },
+            opacity: { 
+              opacity: isInView ? 1 : 0,
+              duration: 0.2 
+            },
+          }}
+          style={{
+            transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.2s"
           }}
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
