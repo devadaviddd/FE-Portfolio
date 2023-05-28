@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { SignInDto } from "../domains";
+import { CreateUserDto } from "../domains";
 import { useUserSlice } from "../store";
 import { useAppDispatch, useAppSelector } from "./redux.hook";
 
-export const useSignIn = () => {
+export const useSignUp = () => {
   const dispatch = useAppDispatch();
   const { actions } = useUserSlice();
   const { actionStatus, error } = useAppSelector((state) => state.user);
@@ -13,19 +13,13 @@ export const useSignIn = () => {
     "error" | "success" | "info" | "warning"
   >("info");
 
-
   useEffect(() => {
-    return () => {
-      dispatch(actions.reset());
-      console.log('error after reset', error);
-      console.log('actionStatus after reset', actionStatus);
-    };
-  }, []);
-
+    console.log("error", error);
+  })
 
   useEffect(() => {
     if (actionStatus === "success") {
-      setToastMessage("Sign in successfully");
+      setToastMessage("Sign up successfully");
       setToastSeverity("success");
       setShowToast(true);
 
@@ -39,9 +33,9 @@ export const useSignIn = () => {
     } else {
       setShowToast(false);
     }
-    
+
     if (error) {
-      setToastMessage("Wrong Credentials");
+      setToastMessage(error.message);
       setToastSeverity("error");
       setShowToast(true);
 
@@ -57,20 +51,32 @@ export const useSignIn = () => {
     }
   }, [actionStatus, error]);
 
+
+  useEffect(() => {
+    return () => {
+      dispatch(actions.reset());
+      console.log("error after reset", error);
+      console.log("actionStatus after reset", actionStatus);
+    };
+  }, []);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
+      fullName: data.get("fullName"),
+      username: data.get("username"),
       email: data.get("email"),
       password: data.get("password"),
     });
-    const input: SignInDto = {
+    const input: CreateUserDto = {
+      fullName: data.get("fullName") as string,
+      username: data.get("username") as string,
       email: data.get("email") as string,
       password: data.get("password") as string,
-    }
-    dispatch(actions.signIn(input));
+    };
+    dispatch(actions.signUp(input));
   };
-
 
   return {
     handleSubmit,
@@ -79,5 +85,5 @@ export const useSignIn = () => {
     showToast,
     toastMessage,
     toastSeverity,
-  }
-}
+  };
+};

@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { userManagementInitialState, userManagementReducer, userRepository } from "../../di";
-import { ErrorResponse, SignInDto } from "../../domains";
+import { CreateUserDto, ErrorResponse, SignInDto } from "../../domains";
 import { AppDispatch, RootState } from "../store";
-import { SignInResponseSuccess } from "../../data/response";
+import { SignInResponseSuccess, SignUpResponseSuccess } from "../../data/response";
+import { UserState } from "./user.state";
 
 
 export const signIn = createAsyncThunk<
@@ -19,11 +20,29 @@ export const signIn = createAsyncThunk<
   }
 })
 
+export const signUp = createAsyncThunk<
+  SignUpResponseSuccess | ErrorResponse,
+  CreateUserDto,
+  { rejectValue: ErrorResponse; state : RootState; dispatch: AppDispatch}
+> ('Sign Up Action', async (input: CreateUserDto, { rejectWithValue}) => {
+  try {
+    const response = await userRepository.createUser(input);
+    return response;
+  } catch (error: any) {
+    const errorResponse = error as ErrorResponse;
+    return rejectWithValue(errorResponse);
+  }
+})
+
 export const userSlice = createSlice({
   name: "user-state-management",
   initialState: userManagementInitialState,
   reducers: {
-    reset: () => userManagementInitialState,
+    reset: () => new UserState({
+      actionStatus: "idle",
+      credential: undefined,
+      error: undefined,
+    }).getProps(),
   },
   extraReducers(builder) {
     builder.addCase(signIn.pending, (state) => ({
@@ -36,6 +55,20 @@ export const userSlice = createSlice({
       error: undefined,
     }));
     builder.addCase(signIn.rejected, (state, { payload }) => ({
+      ...state,
+      actionStatus: "error",
+      error: payload
+    }))
+    builder.addCase(signUp.pending, (state) => ({
+      ...state,
+      actionStatus: "loading",
+    }));
+    builder.addCase(signUp.fulfilled, (state, { payload }) => ({
+      ...state,
+      actionStatus: "success",
+      error: undefined,
+    }));
+    builder.addCase(signUp.rejected, (state, { payload }) => ({
       ...state,
       actionStatus: "error",
       error: payload
@@ -53,6 +86,7 @@ export const useUserSlice = () => {
   const actions = {
     ...userSlice.actions,
     signIn,
+    signUp,
   }
   return { actions };
 }

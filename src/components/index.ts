@@ -4,3 +4,4 @@ export * from './CV-carousel';
 export * from './sign-in';
 export * from './user-hexagon';
 export * from './toast';
+export * from './tooltip';

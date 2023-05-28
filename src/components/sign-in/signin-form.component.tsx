@@ -1,76 +1,22 @@
-import {
-  FormControl,
-  TextField,
-  Typography,
-  TextFieldProps,
-} from "@mui/material";
+import { FormControl, TextField, Typography } from "@mui/material";
 import "./style.css";
 import { RegisterButton, SignInButton } from "../button";
 import { useSignIn } from "../../hooks";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import HelpIcon from "@mui/icons-material/Help";
-import styled from "@emotion/styled";
-import { theme } from "../../theme/theme";
 import React from "react";
-import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
-import { mapStatusToToast } from "../../utils/toast-status-map";
 import { Toast } from "../toast";
-
-const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(() => ({
-  [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: "#f5f5f9",
-    color: "rgba(0, 0, 0, 0.87)",
-    maxWidth: 220,
-    fontSize: theme.typography.pxToRem(12),
-    border: "1px solid #dadde9",
-  },
-}));
+import { HtmlTooltip } from "../tooltip";
 
 export const SignInFormComponent = () => {
-  const { handleSubmit, actionStatus, error } = useSignIn();
-  const [emailFocus, setEmailFocus] = useState<boolean>(false);
-  const [emailError, setEmailError] = useState<boolean>(false);
-
-  const [passwordFocus, setPasswordFocus] = useState<boolean>(false);
-  const [passwordError, setPasswordError] = useState<boolean>(false);
-
-  const [showToast, setShowToast] = useState<boolean>(false);
-  const [toastMessage, setToastMessage] = useState<string>("");
-  const [toastSeverity, setToastSeverity] = useState<
-    "error" | "success" | "info" | "warning"
-  >("info");
-
-
-  useEffect(() => {
-    if (actionStatus === "success") {
-      setToastMessage("Sign in successfully");
-      setToastSeverity("success");
-      setShowToast(true);
-
-      const timer = setTimeout(() => {
-        setShowToast(false);
-      }, 1500);
-
-      return () => {
-        clearTimeout(timer);
-      };
-    }
-    if (actionStatus === 'error') {
-      setToastMessage("Wrong Credentials");
-      setToastSeverity("error");
-      setShowToast(true);
-
-      const timer = setTimeout(() => {
-        setShowToast(false);
-      }, 1500);
-
-      return () => {
-        clearTimeout(timer);
-      };
-    }
-  }, [actionStatus]);
+  const {
+    handleSubmit,
+    actionStatus,
+    error,
+    showToast,
+    toastMessage,
+    toastSeverity,
+  } = useSignIn();
 
   return (
     <FormControl className="FormStyle" component="form" onSubmit={handleSubmit}>

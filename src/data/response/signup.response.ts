@@ -1,3 +1,3 @@
-export type SignUpResponse = {
+export type SignUpResponseSuccess = {
   message: string;
 }
