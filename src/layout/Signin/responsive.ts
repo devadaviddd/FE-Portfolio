@@ -104,6 +104,7 @@ export const ResponsiveStack = styled(Stack)<StackProps>(() => ({
 }));
 
 export const ResponsiveCVLayout = styled(motion.img)(() => ({
+
   [theme.breakpoints.down("tablet")]: {
     height: "400px",
     width: "400px",
@@ -113,5 +114,4 @@ export const ResponsiveCVLayout = styled(motion.img)(() => ({
     height: "300px",
     width: "300px",
   },
-
 }));

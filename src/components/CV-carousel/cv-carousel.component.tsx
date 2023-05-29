@@ -19,7 +19,7 @@ const variants = {
   },
   exit: (direction: number) => {
     return {
-      zIndex: 0,
+      zIndex: -1,
       x: direction < 0 ? 1000 : -1000,
       opacity: 0,
     };
@@ -36,7 +36,6 @@ export const CVCarousel = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
-
   // We only have 3 images, but we paginate them absolutely (ie 1, 2, 3, 4, 5...) and
   // then wrap that within 0-2 to find our image ID in the array below. By passing an
   // absolute page index as the `motion` component's `key` prop, `AnimatePresence` will
@@ -49,7 +48,7 @@ export const CVCarousel = () => {
 
   return (
     <>
-      <AnimatePresence initial={false} custom={direction}>
+      <AnimatePresence initial={false} custom={direction} mode="sync">
         <div className="container">
           <div className="prev" onClick={() => paginate(-1)}>
             {"‣"}
@@ -68,13 +67,14 @@ export const CVCarousel = () => {
           exit="exit"
           ref={ref}
           transition={{
-            opacity: { 
+            opacity: {
               opacity: isInView ? 1 : 0,
-              duration: 0.2 
+              duration: 0.2,
             },
           }}
           style={{
-            transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.2s"
+            transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.2s",
+            position: "absolute",
           }}
           id="cvImage"
           drag="x"
