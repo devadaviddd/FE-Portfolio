@@ -18,11 +18,12 @@ export const Toast = (props: Props) => {
             exit={{ opacity: 0 }}
           >
             <Stack
-              spacing={2}
+              // spacing={2}
               sx={{
-                width: "50%",
+                width: "100%",
                 position: "fixed",
                 bottom: "5px",
+                left: 0,
                 boxShadow: "0px 5px 5px 0px rgba(0,0,0,0.75)",
                 borderRadius: "10px",
                 transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.2s",

@@ -1,6 +1,12 @@
 import { theme } from "../../theme/theme";
 import styled from "@emotion/styled";
-import { Container, Stack, StackProps } from "@mui/material";
+import {
+  Container,
+  FormControl,
+  FormControlTypeMap,
+  Stack,
+  StackProps,
+} from "@mui/material";
 import { AnimatePresence, motion } from "framer-motion";
 
 export const ResponsiveSignInLayout = styled(Container)(() => ({
@@ -104,7 +110,6 @@ export const ResponsiveStack = styled(Stack)<StackProps>(() => ({
 }));
 
 export const ResponsiveCVLayout = styled(motion.img)(() => ({
-
   [theme.breakpoints.down("tablet")]: {
     height: "400px",
     width: "400px",
@@ -115,3 +120,7 @@ export const ResponsiveCVLayout = styled(motion.img)(() => ({
     width: "300px",
   },
 }));
+
+// export const ResponsiveToast = styled("div")(() => ({
+//   width: "100%",
+// }));

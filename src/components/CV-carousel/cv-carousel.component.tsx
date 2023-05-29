@@ -1,28 +1,24 @@
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { wrap } from "popmotion";
 import { cvs } from "../../constant";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./style.css";
 import { ResponsiveCVLayout } from "../../layout/Signin";
+import { useScrollBlock } from "../../hooks";
 
 const variants = {
   enter: (direction: number) => {
     return {
       x: direction > 0 ? 1000 : -1000,
+      y: 0,
       opacity: 0,
     };
   },
   center: {
     zIndex: 1,
     x: 0,
+    y: 0,
     opacity: 1,
-  },
-  exit: (direction: number) => {
-    return {
-      zIndex: -1,
-      x: direction < 0 ? 1000 : -1000,
-      opacity: 0,
-    };
   },
 };
 
@@ -34,12 +30,23 @@ const swipePower = (offset: number, velocity: number) => {
 export const CVCarousel = () => {
   const [[page, direction], setPage] = useState([0, 0]);
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+  const buttonRef = useRef<any>(null);
 
-  // We only have 3 images, but we paginate them absolutely (ie 1, 2, 3, 4, 5...) and
-  // then wrap that within 0-2 to find our image ID in the array below. By passing an
-  // absolute page index as the `motion` component's `key` prop, `AnimatePresence` will
-  // detect it as an entirely new image. So you can infinitely paginate as few as 1 images.
+  const isInView = useInView(ref, { once: true });
+  const [blockScroll, allowScroll] = useScrollBlock();
+  const [isClickable, setIsClickable] = useState(true);
+  const handleNextClick = (direction: number) => {
+    if (!isClickable) {
+      return; 
+    }
+    paginate(direction);
+    blockScroll();
+    setIsClickable(false); 
+    setTimeout(() => {
+      allowScroll();
+      setIsClickable(true); 
+    }, 900);
+  };
   const imageIndex = wrap(0, cvs.length, page);
 
   const paginate = (newDirection: number) => {
@@ -50,10 +57,10 @@ export const CVCarousel = () => {
     <>
       <AnimatePresence initial={false} custom={direction} mode="sync">
         <div className="container">
-          <div className="prev" onClick={() => paginate(-1)}>
+          <div className="prev" onClick={() => handleNextClick(-1)}>
             {"‣"}
           </div>
-          <div className="next" onClick={() => paginate(1)}>
+          <div ref={buttonRef} className="next" onClick={() =>handleNextClick(1)}>
             {"‣"}
           </div>
         </div>
@@ -64,12 +71,10 @@ export const CVCarousel = () => {
           variants={variants}
           initial="enter"
           animate="center"
-          exit="exit"
-          ref={ref}
           transition={{
             opacity: {
               opacity: isInView ? 1 : 0,
-              duration: 0.2,
+              duration: 0.1,
             },
           }}
           style={{
