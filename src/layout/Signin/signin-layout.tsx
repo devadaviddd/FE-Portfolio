@@ -1,9 +1,11 @@
-import { Container } from "@mui/material"
 import { SignInFormComponent } from "../../components/sign-in"
+import { ResponsiveSignInLayout } from "./responsive"
+
+
 
 export const SignInLayout = () => {
   return (
-    <Container maxWidth={false} sx={{
+    <ResponsiveSignInLayout  maxWidth={false} sx={{
       width: "100%",
       height: "100vh",
       background: "white",
@@ -13,20 +15,10 @@ export const SignInLayout = () => {
       alignItems: 'center',
       justifyContent: 'center'
     }}>
-      <div style={{
-        width: '45%',
-        height: '100%',
-      }}>
+      <div id='signinFormCard'>
         <SignInFormComponent/>
       </div>
-      <div style={{
-        width: '45%',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
+      <div id='imageSignIn'>
         <img 
           src={require("../../assets/sign-in.png")}
           alt="sign in background"
@@ -36,6 +28,6 @@ export const SignInLayout = () => {
           }}
         />
       </div>
-    </Container>
+    </ResponsiveSignInLayout>
   )
 }

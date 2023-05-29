@@ -1,15 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import { Stack } from '@mui/material';
-import { LeftRegisterLayout, RightRegisterLayout } from '../../layout';
+import { Stack } from "@mui/material";
+import { LeftRegisterLayout, RightLayOutResponsive, RightRegisterLayout } from "../../layout";
 
 type Props = {};
 
 export const SignUpComponent = (props: Props) => {
   return (
-    <Stack direction="row">
+    <RightLayOutResponsive direction="row">
       <LeftRegisterLayout></LeftRegisterLayout>
-      <RightRegisterLayout></RightRegisterLayout>
-    </Stack>
+      <div id='rightLayout'>
+        <RightRegisterLayout></RightRegisterLayout>
+      </div>
+    </RightLayOutResponsive>
   );
 };

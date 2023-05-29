@@ -9,12 +9,16 @@ import "./style.css";
 import { SignUpButton } from "../button";
 import { NavLink } from "react-router-dom";
 import { HtmlTooltip } from "../tooltip";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import HelpIcon from "@mui/icons-material/Help";
 import { useSignUp } from "../../hooks";
 import { Toast } from "../toast";
+import { useInView } from "framer-motion";
+import { LeftLayOutResponse, SignUpFormResponsive } from "../../layout";
 
 export const SignUpFormComponent = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
   const {
     handleSubmit,
     actionStatus,
@@ -29,7 +33,7 @@ export const SignUpFormComponent = () => {
       component={"form"}
       onSubmit={handleSubmit}
     >
-      <Container
+      <SignUpFormResponsive
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -37,8 +41,9 @@ export const SignUpFormComponent = () => {
           alignItems: "center",
           backgroundColor: "#fff",
           borderRadius: "10px",
-          height: "60vh",
+          height: "70vh",
           boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+          position: "relative",
         }}
         maxWidth="xs"
       >
@@ -163,7 +168,52 @@ export const SignUpFormComponent = () => {
             </Link>
           </NavLink>
         </Typography>
-      </Container>
+
+        <div
+          style={{
+            position: "absolute",
+            top: "-6rem",
+            left: "-10rem",
+            zIndex: -1,
+            height: "500px",
+            opacity: isInView ? 1 : 0,
+            transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.2s",
+          }}
+          ref={ref}
+        >
+          <img
+            src={require("../../assets/sign-in-form-bg.png")}
+            alt="sign in background"
+            style={{}}
+          />
+        </div>
+
+        <div
+          style={{
+            // bottom: "-6rem",
+            // right: "-8rem",
+            // zIndex: -1,
+            // height: "70%",
+            // width: "100%",
+            position: "absolute",
+            opacity: isInView ? 1 : 0,
+            transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.2s",
+          }}
+          ref={ref}
+          id='backgroundBelowForm2'
+        >
+          <img
+            src={require("../../assets/cloud-animation.png")}
+            alt="sign in background"
+            style={{
+              // objectFit: "cover",
+              height: "100%",
+              width: "100%",
+            }}
+          />
+        </div>
+      </SignUpFormResponsive>
+
       <Toast open={showToast} severity={toastSeverity} message={toastMessage} />
     </FormControl>
   );

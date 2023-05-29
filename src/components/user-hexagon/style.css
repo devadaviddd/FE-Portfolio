@@ -14,7 +14,6 @@
   -o-transform: rotate(120deg);
   transform: rotate(120deg);
   cursor: pointer;
-
 }
 .hexagon-in1 {
   overflow: hidden;
@@ -32,8 +31,6 @@
   height: 100%;
   background-repeat: no-repeat;
   background-position: 50%;
-  /* background-image: url('../../assets/user-default.jfif'); */
-  /* background-image: url(var(--backgroundImage)); */
   background-size: contain;
   visibility: visible;
   -webkit-transform: rotate(-60deg);
@@ -42,9 +39,6 @@
   -o-transform: rotate(-60deg);
   transform: rotate(-60deg);
 }
-/* .hexagon-in2:hover {
-  background-image: url(http://placekitten.com/241/241);
-} */
 
 .hexagon2 {
   width: 100px;

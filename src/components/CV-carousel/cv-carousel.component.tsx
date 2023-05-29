@@ -3,6 +3,7 @@ import { wrap } from "popmotion";
 import { cvs } from "../../constant";
 import { useRef, useState } from "react";
 import "./style.css";
+import { ResponsiveCVLayout } from "../../layout/Signin";
 
 const variants = {
   enter: (direction: number) => {
@@ -57,7 +58,7 @@ export const CVCarousel = () => {
             {"‣"}
           </div>
         </div>
-        <motion.img
+        <ResponsiveCVLayout
           key={page}
           src={require("../../" + cvs[imageIndex].imagePath + ".png")}
           custom={direction}
@@ -75,6 +76,7 @@ export const CVCarousel = () => {
           style={{
             transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.2s"
           }}
+          id="cvImage"
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={1}

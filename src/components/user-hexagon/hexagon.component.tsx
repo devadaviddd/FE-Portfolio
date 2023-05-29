@@ -13,8 +13,7 @@ export const HexagonAvatar = (props: Props) => {
   const path : string = '../..' + props.avatar;
   return (
     <div className="hexagon hexagon2" style={{
-      position: 'absolute',
-      // bottom: '-200px',
+      position: 'fixed',
       '--bottom': `${props.bottomPosition}`,
       '--left': `${props.leftPosition}`,
       '--right': `${props.rightPosition}`,
