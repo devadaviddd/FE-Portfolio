@@ -29,10 +29,8 @@ const swipePower = (offset: number, velocity: number) => {
 
 export const CVCarousel = () => {
   const [[page, direction], setPage] = useState([0, 0]);
-  const ref = useRef(null);
-  const buttonRef = useRef<any>(null);
+ const buttonRef = useRef<any>(null);
 
-  const isInView = useInView(ref, { once: true });
   const [blockScroll, allowScroll] = useScrollBlock();
   const [isClickable, setIsClickable] = useState(true);
   const handleNextClick = (direction: number) => {
@@ -43,11 +41,12 @@ export const CVCarousel = () => {
     blockScroll();
     setIsClickable(false); 
     setTimeout(() => {
-      allowScroll();
       setIsClickable(true); 
     }, 900);
+    
   };
   const imageIndex = wrap(0, cvs.length, page);
+
 
   const paginate = (newDirection: number) => {
     setPage([page + newDirection, newDirection]);
@@ -60,7 +59,7 @@ export const CVCarousel = () => {
           <div className="prev" onClick={() => handleNextClick(-1)}>
             {"‣"}
           </div>
-          <div ref={buttonRef} className="next" onClick={() =>handleNextClick(1)}>
+          <div ref={buttonRef} className="next" onClick={() => handleNextClick(1)}>
             {"‣"}
           </div>
         </div>
@@ -71,15 +70,9 @@ export const CVCarousel = () => {
           variants={variants}
           initial="enter"
           animate="center"
-          transition={{
-            opacity: {
-              opacity: isInView ? 1 : 0,
-              duration: 0.1,
-            },
-          }}
           style={{
             transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.2s",
-            position: "absolute",
+            transitionDuration: "0.5s"
           }}
           id="cvImage"
           drag="x"
@@ -93,6 +86,10 @@ export const CVCarousel = () => {
             } else if (swipe > swipeConfidenceThreshold) {
               paginate(-1);
             }
+          }}
+          onTransitionEnd={() => {
+            allowScroll();
+            
           }}
         />
       </AnimatePresence>
